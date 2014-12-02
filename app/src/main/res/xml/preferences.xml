@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <ListPreference
+        android:key="id"
+        android:title="Identifiant"
+        android:dialogTitle="Identifiant du membre de l'équipe"
+        android:entries="@array/pref_sync_frequency_titles"
+        android:entryValues="@array/pref_sync_frequency_values"/>
+</PreferenceScreen>
