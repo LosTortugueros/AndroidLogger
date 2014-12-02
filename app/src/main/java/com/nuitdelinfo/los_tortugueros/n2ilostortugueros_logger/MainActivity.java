@@ -1,5 +1,6 @@
 package com.nuitdelinfo.los_tortugueros.n2ilostortugueros_logger;
 
+import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -33,7 +34,7 @@ import java.io.InputStream;
 import java.util.Date;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends Activity {
 
     private static final String URL = "http://etud.insa-toulouse.fr/~livet/logger.php?user=";
 

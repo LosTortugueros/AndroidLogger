@@ -1,6 +1,5 @@
 package com.nuitdelinfo.los_tortugueros.n2ilostortugueros_logger;
 
-import android.app.ActionBar;
 import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
@@ -11,16 +10,13 @@ import android.preference.PreferenceManager;
 public class SettingsActivity extends PreferenceActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
         super.onCreate(savedInstanceState);
 
         // Display the fragment as the main content.
         getFragmentManager().beginTransaction()
                 .replace(android.R.id.content, new SettingsFragment())
                 .commit();
-        ActionBar actionBar = getActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayOptions(ActionBar.DISPLAY_HOME_AS_UP, ActionBar.DISPLAY_HOME_AS_UP);
-        }
     }
 
     public static class SettingsFragment extends PreferenceFragment {
