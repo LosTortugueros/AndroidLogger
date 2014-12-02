@@ -2,36 +2,36 @@
     <string name="title_activity_settings">Paramètres</string>
 
     <!-- Example settings for Data & Sync -->
-    <string name="pref_header_data_sync">Numéro</string>
+    <string name="pref_header_data_sync">Qui est tu ?</string>
 
-    <string name="pref_title_sync_frequency">Numéro</string>
+    <string name="pref_title_sync_frequency">Qui est tu ?</string>
     <string-array name="pref_sync_frequency_titles">
-        <item>User 1</item>
-        <item>User 2</item>
-        <item>User 3</item>
-        <item>User 4</item>
-        <item>User 5</item>
-        <item>User 6</item>
-        <item>User 7</item>
-        <item>User 8</item>
-        <item>User 9</item>
-        <item>User 10</item>
-        <item>User 11</item>
-        <item>User 12</item>
+        <item>Jules</item>
+        <item>Alexandre</item>
+        <item>Tristan</item>
+        <item>Alexis</item>
+        <item>Jérémie</item>
+        <item>Alfred</item>
+        <item>Hugo</item>
+        <item>Mickaël</item>
+        <item>David</item>
+        <item>Mélina</item>
+        <item>Paul</item>
+        <item>Sébastien</item>
     </string-array>
     <string-array name="pref_sync_frequency_values">
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
-        <item>5</item>
-        <item>6</item>
-        <item>7</item>
-        <item>8</item>
-        <item>9</item>
-        <item>10</item>
-        <item>11</item>
-        <item>12</item>
+        <item>jules</item>
+        <item>alexandre</item>
+        <item>tristan</item>
+        <item>alexis</item>
+        <item>jeremie</item>
+        <item>alfred</item>
+        <item>hugo</item>
+        <item>mickael</item>
+        <item>david</item>
+        <item>melina</item>
+        <item>paul</item>
+        <item>sebastien</item>
     </string-array>
 
 </resources>

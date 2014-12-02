@@ -1,15 +1,10 @@
 package com.nuitdelinfo.los_tortugueros.n2ilostortugueros_logger;
 
 import android.app.Activity;
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -17,10 +12,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.ByteArrayEntity;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.BasicHttpParams;
@@ -30,13 +23,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Date;
 
 
 public class MainActivity extends Activity {
 
-    private static final String URL = "http://etud.insa-toulouse.fr/~livet/logger.php?user=";
+    private static final String URL = "http://etud.insa-toulouse.fr/~livet/ServerLogger/logger.php?user=";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,42 +63,56 @@ public class MainActivity extends Activity {
     public void performClick(View v){
         Log.d("MainActivity","Click");
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-        String syncConnPref = sharedPref.getString("sync_frequency", "1");
-        switch (v.getId()){
-            case R.id.buttonCafe:
-                new SendToServerTask().execute(URL+syncConnPref,"cafe");
-                break;
-            case R.id.buttonThe:
-                new SendToServerTask().execute(URL+syncConnPref,"the");
-                break;
-            case R.id.buttonBiere:
-                new SendToServerTask().execute(URL+syncConnPref,"biere");
-                break;
-            case R.id.buttonAutre:
-                new SendToServerTask().execute(URL+syncConnPref,"autre");
-                break;
-            case R.id.buttonCoca:
-                new SendToServerTask().execute(URL+syncConnPref,"coca");
-                break;
-            case R.id.buttonEau:
-                new SendToServerTask().execute(URL+syncConnPref,"eau");
-                break;
-            case R.id.buttonRedbull:
-                new SendToServerTask().execute(URL+syncConnPref,"redbull");
-                break;
-            case R.id.buttonSoda:
-                new SendToServerTask().execute(URL+syncConnPref,"soda");
-                break;
-
+        String name = sharedPref.getString("id", "");
+        if(!name.equals("")){
+            switch (v.getId()){
+                case R.id.buttonCafe:
+                    new SendToServerTask().execute(URL+ name,"cafe","boisson");
+                    break;
+                case R.id.buttonThe:
+                    new SendToServerTask().execute(URL+ name,"the","boisson");
+                    break;
+                case R.id.buttonBiere:
+                    new SendToServerTask().execute(URL+ name,"biere","boisson");
+                    break;
+                case R.id.buttonAutre:
+                    new SendToServerTask().execute(URL+ name,"autre","boisson");
+                    break;
+                case R.id.buttonCoca:
+                    new SendToServerTask().execute(URL+ name,"coca","boisson");
+                    break;
+                case R.id.buttonEau:
+                    new SendToServerTask().execute(URL+ name,"eau","boisson");
+                    break;
+                case R.id.buttonRedbull:
+                    new SendToServerTask().execute(URL+ name,"redbull","boisson");
+                    break;
+                case R.id.buttonSoda:
+                    new SendToServerTask().execute(URL+ name,"soda","boisson");
+                    break;
+                case R.id.buttonCrepes:
+                    new SendToServerTask().execute(URL+ name,"crepes","nourriture");
+                    break;
+                case R.id.buttonPetitFour:
+                    new SendToServerTask().execute(URL+ name,"pfour","nourriture");
+                    break;
+                case R.id.buttonPizza:
+                    new SendToServerTask().execute(URL+ name,"pizza","nourriture");
+                    break;
+                case R.id.buttonInconnu:
+                    new SendToServerTask().execute(URL+ name,"inconnu","nourriture");
+                    break;
+            }
         }
+
     }
 
-    private String getDataToSend(String name){
+    private String getDataToSend(String name,String capteur){
         Date d = new Date();
         JSONObject send = new JSONObject();
         try {
             send.put("source","mobile");
-            send.put("capteur","boisson");
+            send.put("capteur",capteur);
             send.put("timestamp",d.getTime()/1000);
             send.put("type",name);
             Log.d("JSON",send.toString());
@@ -129,7 +135,7 @@ public class MainActivity extends Activity {
 
             // params comes from the execute() call: params[0] is the url.
             try {
-                send(data[0],getDataToSend(data[1]));
+                send(data[0],getDataToSend(data[1],data[2]));
                 return "Ajout de la boisson "+data[1];
             } catch (IOException e) {
                 return "Unable to retrieve web page. URL may be invalid.";

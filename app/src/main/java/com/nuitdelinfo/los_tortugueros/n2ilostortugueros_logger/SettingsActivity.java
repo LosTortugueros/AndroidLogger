@@ -6,6 +6,7 @@ import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
+import android.util.Log;
 
 public class SettingsActivity extends PreferenceActivity{
     @Override
@@ -46,6 +47,7 @@ public class SettingsActivity extends PreferenceActivity{
                 // the preference's 'entries' list.
                 ListPreference listPreference = (ListPreference) preference;
                 int index = listPreference.findIndexOfValue(stringValue);
+                Log.d("Pref", stringValue);
 
                 // Set the summary to reflect the new value.
                 preference.setSummary(
@@ -75,7 +77,6 @@ public class SettingsActivity extends PreferenceActivity{
     private static void bindPreferenceSummaryToValue(Preference preference) {
         // Set the listener to watch for value changes.
         preference.setOnPreferenceChangeListener(sBindPreferenceSummaryToValueListener);
-
         // Trigger the listener immediately with the preference's
         // current value.
         sBindPreferenceSummaryToValueListener.onPreferenceChange(preference,

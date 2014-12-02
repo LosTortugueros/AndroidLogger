@@ -162,6 +162,7 @@
                 android:id="@+id/buttonPizza"
                 android:layout_weight="0.5"
                 android:minHeight="60dp"
+                android:onClick="performClick"
                 />
 
             <Button
@@ -170,7 +171,8 @@
                 android:text="Petit four"
                 android:id="@+id/buttonPetitFour"
                 android:layout_weight="0.5"
-                android:minHeight="60dp"/>
+                android:minHeight="60dp"
+                android:onClick="performClick"/>
         </LinearLayout>
 
         <LinearLayout
@@ -184,6 +186,7 @@
                 android:id="@+id/buttonCrepes"
                 android:layout_weight="0.5"
                 android:minHeight="60dp"
+                android:onClick="performClick"
                 />
 
             <Button
@@ -192,7 +195,8 @@
                 android:text="Inconnu"
                 android:id="@+id/buttonInconnu"
                 android:layout_weight="0.5"
-                android:minHeight="60dp"/>
+                android:minHeight="60dp"
+                android:onClick="performClick"/>
         </LinearLayout>
     </LinearLayout>
 
