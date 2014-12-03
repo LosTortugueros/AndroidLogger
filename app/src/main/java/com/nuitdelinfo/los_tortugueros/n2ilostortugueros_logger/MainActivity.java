@@ -1,9 +1,15 @@
 package com.nuitdelinfo.los_tortugueros.n2ilostortugueros_logger;
 
 import android.app.Activity;
+import android.app.Application;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.wifi.ScanResult;
+import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
+import android.os.Parcelable;
 import android.preference.PreferenceManager;
 import android.os.Bundle;
 import android.util.Log;
@@ -24,17 +30,22 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.HashMap;
 
 
 public class MainActivity extends Activity {
 
     private static final String URL = "http://etud.insa-toulouse.fr/~livet/ServerLogger/logger.php?user=";
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     }
+
+
 
 
     @Override
@@ -165,5 +176,24 @@ public class MainActivity extends Activity {
         request.setHeader("Content-type", "application/json");
         request.setEntity(new StringEntity(toSend));
         Log.d("Response",""+client.execute(request).getStatusLine().getStatusCode());
+    }
+
+    public static class WifiReceiver extends BroadcastReceiver {
+        public WifiReceiver() {
+        }
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            WifiManager mainWifi = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+            SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
+            String bssid = sharedPref.getString("bssid", "");
+
+            for(ScanResult result : mainWifi.getScanResults()){
+                if("InviteINSA".equals(result.SSID) && !bssid.equals(result.BSSID)){
+                    sharedPref.edit().putString("bssid",result.BSSID);
+                    Toast.makeText(context,"New BSSID : "+result.BSSID, Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
     }
 }
