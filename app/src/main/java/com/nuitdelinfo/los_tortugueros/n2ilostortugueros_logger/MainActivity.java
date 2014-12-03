@@ -35,7 +35,7 @@ import java.util.HashMap;
 
 public class MainActivity extends Activity {
 
-    private static final String URL = "http://etud.insa-toulouse.fr/~livet/ServerLogger/logger.php?user=";
+    public static final String URL = "http://etud.insa-toulouse.fr/~livet/ServerLogger/logger.php?user=";
 
 
 
@@ -43,6 +43,7 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        startService(new Intent(this,GPSLoggerService.class));
     }
 
 
